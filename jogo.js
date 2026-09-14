@@ -6,6 +6,8 @@ for(let i = 0; i < tabuleiro.length; i++){
 }
 
 for(let i = 0; i < tabuleiro.length; i++){
+    quebraLinha = document.createElement('br');
+    document.body.append(quebraLinha);
     for(let j = 0; j < tabuleiro[i].length; j++){
         button = document.createElement('button');
         button.setAttribute('type', 'button');
