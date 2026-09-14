@@ -1,0 +1,17 @@
+button{
+    width: 100px;
+    border-width: 6px;
+    height: 100px;
+    line-height: 100px;
+    background-color: whitesmoke;
+    font-size: 100px;
+    border-left: 0;
+    border-top: 0;
+    vertical-align: top;
+}
+
+#btJogo0{
+    border-top: 100px;
+    border-color: black;
+    border-width: 100px;
+}

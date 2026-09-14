@@ -1,20 +1,21 @@
 let button, quebraLinha;
-let tabuleiro = new Array(3);
+let tabuleiro = new Array(8);
 
-for(let i = 0; i < tabuleiro.length; i++){
-    tabuleiro[i] = new Array(3)
+for (let i = 0; i < tabuleiro.length; i++) {
+    tabuleiro[i] = new Array(8);
 }
 
-for(let i = 0; i < tabuleiro.length; i++){
+for (let i = 0; i < tabuleiro.length; i++) {
     quebraLinha = document.createElement('br');
     document.body.append(quebraLinha);
-    for(let j = 0; j < tabuleiro[i].length; j++){
+    for (let j = 0; j < tabuleiro[i].length; j++) {
         button = document.createElement('button');
         button.setAttribute('type', 'button');
         button.setAttribute('id', 'bt' + i + "" + j);
         button.setAttribute('class', 'btJogo' + i);
         button.append(document.createTextNode(""));
-        document.body.append(button)
-        
+        document.body.append(button);
+
+        button.style.backgroundColor = (i + j) % 2 === 0 ? 'white' : 'black';
     }
 }
