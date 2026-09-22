@@ -27,6 +27,13 @@ document.body.append(h3)
 
 function marca(linha, coluna) {
     marcarCasa("bt" + linha + "" + coluna)
+
+    // checa a linha e a coluna que acabaram de ser jogadas, mais as 2 diagonais
+    encerraJogo(linha, coluna, 0, 0)
+
+    if (jogada > 9 && vencedor == 0) {
+        document.getElementById('resultado').innerHTML = "Deu velha!"
+    }
 }
 
 function marcarCasa(nomeBotao) {
@@ -41,19 +48,21 @@ function marcarCasa(nomeBotao) {
     document.getElementById(nomeBotao).disabled = true
 }   
 
-//     if (jogada > 9 && vencedor == 0) {
-//         document.getElementById('resultado').innerHTML = "Deu velha!"
-//     } else {
-//         document.getElementById('resultado').innerHTML = "É us guri, ganhou"
-//     }
-// }
-
 function travarCasa() {
     for (let i = 0; i < tabuleiro.length; i++) {
         for (let j = 0; j < tabuleiro[i].length; j++) {
             document.getElementById("bt" + i + "" + j).disabled = true
         }
     }
+}
+
+function encerraJogo(linha, coluna, linhaManual, colunaManual){
+    verificarLinhasXColunas(linha, linha, linha, colunaManual, colunaManual+1, colunaManual+2)
+
+    verificarLinhasXColunas(linhaManual, linhaManual+1, linhaManual+2, coluna, coluna, coluna)
+
+    verificaDiagonal("bt00", "bt11", "bt22")
+    verificaDiagonal("bt02", "bt11", "bt20")
 }
 
 function verificarLinhasXColunas(posL1, posL2, posL3, posC1, posC2, posC3) {
@@ -70,3 +79,24 @@ function verificarLinhasXColunas(posL1, posL2, posL3, posC1, posC2, posC3) {
                 } 
     }
 }
+
+function verificaDiagonal(pos1, pos2, pos3){
+    let diagonal = [
+     document.getElementById(pos1).innerText, 
+     document.getElementById(pos2).innerText,
+     document.getElementById(pos3).innerText
+    ];
+    if((diagonal[0] == "X" && diagonal[1] == "X" && diagonal[2] == "X" ) || 
+   ( diagonal[0] == "O" && diagonal[1] == "O" && diagonal[2] == "O")
+  ){
+     document.getElementById("resultado").innerText = "Jogo Finalizado!\nVencedor: " + document.getElementById("bt11").innerText;
+     travarCasa();
+     let contRegressivo = tabuleiro.length -1;
+     for(let cont in tabuleiro){
+        (pos3 == "bt22") ? document.getElementById("bt" + cont + "" + cont).style.color = "red" : 
+        document.getElementById("bt" + cont + "" + contRegressivo--).style.color = "blue";
+
+        vencedor++;
+     }
+  }
+};
